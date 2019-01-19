@@ -2,6 +2,8 @@ import React from "react";
 import { Grid } from "semantic-ui-react";
 import uuid from "uuid";
 import User from "./user/User.jsx";
+import TweetList from "./tweets/TweetList.jsx";
+import Notification from "./notification/Notification.jsx";
 
 const user = {
   name: "Matthew",
@@ -53,7 +55,12 @@ class Dashboard extends React.Component {
         <Grid.Column width={4}>
           <User user={user} />
         </Grid.Column>
-        <Grid.Column width={8} />
+        <Grid.Column width={8}>
+          <TweetList tweets={tweets} />
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <Notification />
+        </Grid.Column>
       </Grid>
     );
   }

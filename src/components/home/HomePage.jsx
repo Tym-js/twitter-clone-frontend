@@ -1,5 +1,5 @@
-import React from "react";
-import { Icon } from "semantic-ui-react";
+import React from "react"
+import { Icon } from "semantic-ui-react"
 
 const HomePage = ({ history }) => {
   return (
@@ -15,7 +15,7 @@ const HomePage = ({ history }) => {
           </h1>
           <h2>Twitter Clone App</h2>
           <div
-            onClick={() => history.push("/events")}
+            onClick={() => history.push("/tweets")}
             className="ui huge white inverted button"
           >
             Get Started
@@ -25,7 +25,7 @@ const HomePage = ({ history }) => {
       </div>
       <div style={{ textAlign: "center" }}>@ 2019</div>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage
