@@ -1,4 +1,5 @@
 import uuid from "uuid";
+import { ADD_POST } from "../actions/tweets";
 
 const initialState = [
   {
@@ -30,6 +31,15 @@ const initialState = [
 
 const tweets = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_POST:
+      return state.concat({
+        id: uuid(),
+        content: action.payload.content,
+        user: {
+          name: "Matthew",
+          photoURL: "https://randomuser.me/api/portraits/men/20.jpg"
+        }
+      });
     default:
       return state;
   }
