@@ -29,22 +29,20 @@ class TweetModal extends React.Component {
         size="tiny"
       >
         <Header icon="comment alternate outline" content="compose new post" />{" "}
-        <Form onSubmit={this.handleSubmit}>
-          <Modal.Content>
+        <Modal.Content>
+          <Form onSubmit={this.handleSubmit}>
             <Form.TextArea
               name="content"
               onChange={this.handleChange}
               value={content}
               placeholder="Tell us more"
             />
-          </Modal.Content>
 
-          <Modal.Actions>
-            <Button color="blue" onClick={this.handleSubmit}>
+            <Form.Button color="blue" onClick={this.handleSubmit}>
               <Icon name="checkmark" /> Post
-            </Button>
-          </Modal.Actions>
-        </Form>
+            </Form.Button>
+          </Form>
+        </Modal.Content>
       </Modal>
     );
   }
