@@ -15,7 +15,7 @@ const HomePage = ({ history }) => {
           </h1>
           <h2>Twitter Clone App</h2>
           <div
-            onClick={() => history.push("/tweets")}
+            onClick={() => history.push("/register")}
             className="ui huge white inverted button"
           >
             Get Started
