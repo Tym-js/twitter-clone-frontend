@@ -1,5 +1,5 @@
-import uuid from "uuid";
-import { ADD_POST } from "../actions/tweets";
+import uuid from "uuid"
+import { ADD_POST } from "../actions/posts"
 
 const initialState = [
   {
@@ -27,9 +27,9 @@ const initialState = [
       photoURL: "https://randomuser.me/api/portraits/men/20.jpg"
     }
   }
-];
+]
 
-const tweets = (state = initialState, action) => {
+const posts = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
       return state.concat({
@@ -39,10 +39,10 @@ const tweets = (state = initialState, action) => {
           name: "Matthew",
           photoURL: "https://randomuser.me/api/portraits/men/20.jpg"
         }
-      });
+      })
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default tweets;
+export default posts

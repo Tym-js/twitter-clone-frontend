@@ -4,11 +4,11 @@ import TweetItem from "./TweetItem.jsx"
 
 class TweetList extends React.Component {
   render() {
-    const { tweets } = this.props
+    const { posts } = this.props
     return (
       <Segment.Group>
-        {tweets.map(tweet => (
-          <TweetItem key={tweet.id} tweet={tweet} />
+        {posts.map(post => (
+          <TweetItem key={post.id} tweet={post} />
         ))}
       </Segment.Group>
     )

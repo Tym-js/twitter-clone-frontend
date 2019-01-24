@@ -1,5 +1,5 @@
-import React from "react";
-import { Segment, Item, Icon, List } from "semantic-ui-react";
+import React from "react"
+import { Segment, Item, Icon, List } from "semantic-ui-react"
 
 const TweetItem = ({ tweet }) => {
   return (
@@ -20,19 +20,18 @@ const TweetItem = ({ tweet }) => {
       <Segment clearing>
         <List horizontal>
           <List.Item>
-            <Icon name="comment outline" /> 111
+            <Icon name="comment outline" /> 0
           </List.Item>
           <List.Item>
-            <Icon name="exchange" /> 222
+            <Icon name="exchange" /> 0
           </List.Item>
           <List.Item>
-            <Icon name="heart outline" />
-            333
+            <Icon name="heart outline" /> 0
           </List.Item>
         </List>
       </Segment>
     </Segment.Group>
-  );
-};
+  )
+}
 
-export default TweetItem;
+export default TweetItem
