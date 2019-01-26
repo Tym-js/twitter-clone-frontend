@@ -9,6 +9,7 @@ class Navbar extends React.Component {
 
   render() {
     const { activeItem } = this.state;
+    const { authedUser, openModal } = this.props;
 
     return (
       <Menu>
@@ -44,19 +45,10 @@ class Navbar extends React.Component {
             />
           </Menu.Item>
           <Menu.Item>
-            <Image
-              circular
-              size="mini"
-              src="https://randomuser.me/api/portraits/men/20.jpg"
-            />
+            <Image circular size="mini" src={authedUser.photoURL} />
           </Menu.Item>
           <Menu.Item>
-            <Button
-              circular
-              primary
-              content={"Tweet"}
-              onClick={this.props.openModal}
-            />
+            <Button circular primary content={"Tweet"} onClick={openModal} />
           </Menu.Item>
         </Container>
       </Menu>
@@ -64,7 +56,11 @@ class Navbar extends React.Component {
   }
 }
 
+const mapStateTopProps = state => ({
+  authedUser: state.authedUser
+});
+
 export default connect(
-  null,
+  mapStateTopProps,
   { openModal }
 )(Navbar);

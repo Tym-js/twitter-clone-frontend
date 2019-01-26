@@ -10,6 +10,7 @@ import {
   Header
 } from "semantic-ui-react"
 import { Link } from "react-router-dom"
+import "./auth.css"
 
 class Login extends React.Component {
   state = {
