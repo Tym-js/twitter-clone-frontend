@@ -7,6 +7,7 @@
   "dependencies": {
     "axios": "latest",
     "firebase": "latest",
+    "firebase-admin": "latest",
     "history": "latest",
     "md5": "latest",
     "react": "16.5.2",

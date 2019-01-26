@@ -1,9 +1,9 @@
-import React from "react";
-import { Card, Image, Icon, Button } from "semantic-ui-react";
+import React from "react"
+import { Card, Image, Icon, Button } from "semantic-ui-react"
 
 class User extends React.Component {
   render() {
-    const { user } = this.props;
+    const { user } = this.props
     return (
       <Card>
         <Image size="big" src={user.photoURL} />
@@ -22,8 +22,8 @@ class User extends React.Component {
         </Card.Content>
         <Button circular primary content={"Setting"} onClick={() => {}} />
       </Card>
-    );
+    )
   }
 }
 
-export default User;
+export default User
