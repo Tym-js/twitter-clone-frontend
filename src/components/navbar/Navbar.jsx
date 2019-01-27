@@ -1,11 +1,31 @@
 import React from "react";
-import { Menu, Container, Input, Image, Button } from "semantic-ui-react";
+import firebase from "../../firebase";
+import {
+  Menu,
+  Container,
+  Input,
+  Image,
+  Button,
+  Dropdown
+} from "semantic-ui-react";
 import { connect } from "react-redux";
 import { openModal } from "../../actions/tweetModal";
 
 class Navbar extends React.Component {
   state = {};
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  handleSignOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        // Sign-out successful.
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+  };
 
   render() {
     const { activeItem } = this.state;
@@ -46,6 +66,11 @@ class Navbar extends React.Component {
           </Menu.Item>
           <Menu.Item>
             <Image circular size="mini" src={authedUser.photoURL} />
+            <Dropdown>
+              <Dropdown.Menu>
+                <Dropdown.Item text="Logout" onClick={this.handleSignOut} />
+              </Dropdown.Menu>
+            </Dropdown>
           </Menu.Item>
           <Menu.Item>
             <Button circular primary content={"Tweet"} onClick={openModal} />

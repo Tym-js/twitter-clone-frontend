@@ -1,38 +1,38 @@
-import React from "react"
-import firebase from "../../../firebase"
-import { Modal, Header, Icon, Form } from "semantic-ui-react"
-var db = firebase.firestore()
+import React from "react";
+import firebase from "../../../firebase";
+import { Modal, Header, Icon, Form } from "semantic-ui-react";
+var db = firebase.firestore();
 
 class TweetModal extends React.Component {
   state = {
     content: ""
-  }
+  };
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   handleSubmit = event => {
-    event.preventDefault()
-    this.addPost(this.state.content)
+    event.preventDefault();
+    this.addPost(this.state.content);
     this.setState({
       content: ""
-    })
-  }
+    });
+  };
 
   addPost = content => {
-    const currentUser = firebase.auth().currentUser
-    const ref = db.collection("users").doc(currentUser.uid)
+    const currentUser = firebase.auth().currentUser;
     db.collection("posts").add({
       content: content,
-      createdBy: ref,
-      createdAt: new Date()
-    })
-  }
+      createdBy: currentUser.uid,
+      createdAt: new Date(),
+      like_count: 0
+    });
+  };
 
   render() {
-    const { content } = this.state
-    const { tweetModal, closeModal } = this.props
+    const { content } = this.state;
+    const { tweetModal, closeModal } = this.props;
     return (
       <Modal
         open={tweetModal.isOpen}
@@ -56,8 +56,8 @@ class TweetModal extends React.Component {
           </Form>
         </Modal.Content>
       </Modal>
-    )
+    );
   }
 }
 
-export default TweetModal
+export default TweetModal;

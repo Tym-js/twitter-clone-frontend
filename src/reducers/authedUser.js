@@ -1,6 +1,7 @@
 import { SET_USER, CLEAR_USER } from "../actions/authedUser";
 
 const initialState = {
+  uid: "",
   name: "",
   photoURL: "",
   joinedDate: "Joined in 2015",
@@ -11,15 +12,17 @@ const initialState = {
 const authedUser = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      const { displayName, photoURL } = action.payload.authedUser;
+      const { uid, displayName, photoURL } = action.payload.authedUser;
       return {
         ...state,
+        uid: uid,
         name: displayName,
         photoURL: photoURL
       };
     case CLEAR_USER:
       return {
         ...state,
+        uid: "",
         name: "",
         photoURL: ""
       };

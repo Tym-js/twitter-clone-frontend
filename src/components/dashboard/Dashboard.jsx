@@ -1,18 +1,18 @@
-import React from "react"
-import { connect } from "react-redux"
-import { Grid } from "semantic-ui-react"
-import User from "./user/User.jsx"
-import TweetList from "./tweets/TweetList.jsx"
-import TweetModal from "./tweets/TweetModal.jsx"
-import { openModal, closeModal } from "../../actions/tweetModal"
-import Notification from "./notification/Notification.jsx"
+import React from "react";
+import { connect } from "react-redux";
+import { Grid } from "semantic-ui-react";
+import User from "./user/User.jsx";
+import TweetList from "./tweets/TweetList.jsx";
+import TweetModal from "./tweets/TweetModal.jsx";
+import { openModal, closeModal } from "../../actions/tweetModal";
+import Notification from "./notification/Notification.jsx";
 
 class Dashboard extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isOpen: false
-    }
+    };
   }
 
   render() {
@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
       openModal,
       closeModal,
       addPost
-    } = this.props
+    } = this.props;
     return (
       <Grid>
         <Grid.Column width={4}>
@@ -37,13 +37,14 @@ class Dashboard extends React.Component {
           <Notification users={users} />
         </Grid.Column>
         <TweetModal
+          authedUser={authedUser}
           tweetModal={tweetModal}
           openModal={openModal}
           closeModal={closeModal}
           addPost={addPost}
         />
       </Grid>
-    )
+    );
   }
 }
 
@@ -52,9 +53,9 @@ const mapStateToProps = state => ({
   posts: state.posts,
   users: state.users,
   tweetModal: state.tweetModal
-})
+});
 
 export default connect(
   mapStateToProps,
   { openModal, closeModal }
-)(Dashboard)
+)(Dashboard);
