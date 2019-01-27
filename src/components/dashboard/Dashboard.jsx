@@ -6,25 +6,74 @@ import TweetList from "./tweets/TweetList.jsx";
 import TweetModal from "./tweets/TweetModal.jsx";
 import { openModal, closeModal } from "../../actions/tweetModal";
 import Notification from "./notification/Notification.jsx";
+import firebase from "../../firebase";
+var db = firebase.firestore();
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      posts: []
     };
   }
+
+  componentWillMount() {
+    this.getPosts();
+  }
+
+  getPosts = () => {
+    const currentUser = firebase.auth().currentUser;
+    let posts = [];
+
+    db.collection("posts")
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          if (currentUser.uid === doc.data().createdBy) {
+            posts.push({
+              id: doc.id,
+              content: doc.data().content,
+              user: doc.data().createdBy
+            });
+          }
+        });
+        return posts;
+      })
+      .then(posts => {
+        posts.map(post => {
+          db.collection("users")
+            .doc(post.user)
+            .get()
+            .then(doc => {
+              post.user = {
+                name: doc.data().name,
+                photoURL: doc.data().photoURL
+              };
+            });
+          return post;
+        });
+        return posts;
+      })
+      .then(posts => {
+        this.setState({
+          posts: posts
+        });
+      });
+  };
 
   render() {
     const {
       authedUser,
-      posts,
       users,
       tweetModal,
       openModal,
       closeModal,
       addPost
     } = this.props;
+    const { posts } = this.state;
+
     return (
       <Grid>
         <Grid.Column width={4}>
