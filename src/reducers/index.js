@@ -1,10 +1,12 @@
-import { combineReducers } from "redux"
-import authedUser from "./authedUser"
-import users from "./users"
-import tweetModal from "./tweetModal"
+import { combineReducers } from "redux";
+import currentUser from "./currentUser";
+import users from "./users";
+import posts from "./posts";
+import tweetModal from "./tweetModal";
 
 export default combineReducers({
-  authedUser,
+  currentUser,
+  posts,
   users,
   tweetModal
-})
+});

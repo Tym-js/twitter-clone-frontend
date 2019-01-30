@@ -15,19 +15,28 @@ class TweetModal extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     this.addPost(this.state.content);
+    this.props.getPosts(this.props.currentUser);
     this.setState({
       content: ""
     });
+    this.props.closeModal();
   };
 
   addPost = content => {
-    const currentUser = firebase.auth().currentUser;
-    db.collection("posts").add({
-      content: content,
-      createdBy: currentUser.uid,
-      createdAt: new Date(),
-      like_count: 0
-    });
+    const currentUser = this.props.currentUser;
+    db.collection("users")
+      .doc(currentUser.uid)
+      .collection("myPosts")
+      .add({
+        content: content,
+        createdBy: currentUser.uid,
+        createdAt: new Date(),
+        like_count: 0,
+        user: {
+          name: currentUser.name,
+          photoURL: currentUser.photoURL
+        }
+      });
   };
 
   render() {
@@ -49,7 +58,6 @@ class TweetModal extends React.Component {
               value={content}
               placeholder="Tell us more"
             />
-
             <Form.Button color="blue" onClick={this.handleSubmit}>
               <Icon name="checkmark" /> Post
             </Form.Button>

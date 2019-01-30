@@ -8,6 +8,7 @@
     "axios": "latest",
     "firebase": "latest",
     "firebase-admin": "latest",
+    "firebase-functions": "2.1.0",
     "history": "latest",
     "md5": "latest",
     "react": "16.5.2",

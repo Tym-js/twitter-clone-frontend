@@ -5,6 +5,7 @@ import User from "./user/User.jsx";
 import TweetList from "./tweets/TweetList.jsx";
 import TweetModal from "./tweets/TweetModal.jsx";
 import { openModal, closeModal } from "../../actions/tweetModal";
+import { getPosts } from "../../actions/posts";
 import Notification from "./notification/Notification.jsx";
 import firebase from "../../firebase";
 var db = firebase.firestore();
@@ -13,71 +14,25 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false,
-      posts: []
+      isOpen: false
     };
   }
 
-  componentWillMount() {
-    this.getPosts();
-  }
-
-  getPosts = () => {
-    const currentUser = firebase.auth().currentUser;
-    let posts = [];
-
-    db.collection("posts")
-      .orderBy("createdAt", "desc")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          if (currentUser.uid === doc.data().createdBy) {
-            posts.push({
-              id: doc.id,
-              content: doc.data().content,
-              user: doc.data().createdBy
-            });
-          }
-        });
-        return posts;
-      })
-      .then(posts => {
-        posts.map(post => {
-          db.collection("users")
-            .doc(post.user)
-            .get()
-            .then(doc => {
-              post.user = {
-                name: doc.data().name,
-                photoURL: doc.data().photoURL
-              };
-            });
-          return post;
-        });
-        return posts;
-      })
-      .then(posts => {
-        this.setState({
-          posts: posts
-        });
-      });
-  };
-
   render() {
     const {
-      authedUser,
+      currentUser,
       users,
+      posts,
       tweetModal,
       openModal,
       closeModal,
-      addPost
+      getPosts
     } = this.props;
-    const { posts } = this.state;
 
     return (
       <Grid>
         <Grid.Column width={4}>
-          <User user={authedUser} />
+          <User user={currentUser} />
         </Grid.Column>
         <Grid.Column width={8}>
           <TweetList posts={posts} />
@@ -86,11 +41,11 @@ class Dashboard extends React.Component {
           <Notification users={users} />
         </Grid.Column>
         <TweetModal
-          authedUser={authedUser}
+          currentUser={currentUser}
           tweetModal={tweetModal}
           openModal={openModal}
           closeModal={closeModal}
-          addPost={addPost}
+          getPosts={getPosts}
         />
       </Grid>
     );
@@ -98,13 +53,13 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  authedUser: state.authedUser,
-  posts: state.posts,
+  currentUser: state.currentUser,
   users: state.users,
+  posts: state.posts.posts,
   tweetModal: state.tweetModal
 });
 
 export default connect(
   mapStateToProps,
-  { openModal, closeModal }
+  { openModal, closeModal, getPosts }
 )(Dashboard);

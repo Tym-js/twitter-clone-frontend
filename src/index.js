@@ -9,8 +9,8 @@ import "semantic-ui-css/semantic.min.css";
 import "./styles.css";
 
 import rootReducer from "./reducers/index";
-
 import App from "./components/App";
+
 const enhancer =
   process.env.NODE_ENV === "development"
     ? composeWithDevTools(applyMiddleware(thunk))

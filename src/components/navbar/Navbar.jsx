@@ -29,7 +29,7 @@ class Navbar extends React.Component {
 
   render() {
     const { activeItem } = this.state;
-    const { authedUser, openModal } = this.props;
+    const { currentUser, openModal } = this.props;
 
     return (
       <Menu>
@@ -65,7 +65,7 @@ class Navbar extends React.Component {
             />
           </Menu.Item>
           <Menu.Item>
-            <Image circular size="mini" src={authedUser.photoURL} />
+            <Image circular size="mini" src={currentUser.photoURL} />
             <Dropdown>
               <Dropdown.Menu>
                 <Dropdown.Item text="Logout" onClick={this.handleSignOut} />
@@ -82,7 +82,7 @@ class Navbar extends React.Component {
 }
 
 const mapStateTopProps = state => ({
-  authedUser: state.authedUser
+  currentUser: state.currentUser
 });
 
 export default connect(

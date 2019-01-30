@@ -30,6 +30,9 @@ class PostItem extends React.Component {
             <List.Item>
               <Icon name="heart outline" /> 0
             </List.Item>
+            <List.Item>
+              <Icon name="trash alternate" />
+            </List.Item>
           </List>
         </Segment>
       </Segment.Group>
