@@ -4,11 +4,11 @@ import PostItem from "./PostItem.jsx";
 
 class TweetList extends React.Component {
   render() {
-    const { posts } = this.props;
+    const { posts, deletePost } = this.props;
     return (
       <Segment.Group>
         {posts.map(post => (
-          <PostItem key={post.id} post={post} />
+          <PostItem key={post.id} post={post} deletePost={deletePost} />
         ))}
       </Segment.Group>
     );

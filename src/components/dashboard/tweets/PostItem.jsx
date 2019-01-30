@@ -1,7 +1,12 @@
 import React from "react";
-import { Segment, Item, Icon, List } from "semantic-ui-react";
+import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
 
 class PostItem extends React.Component {
+  handleDelete = () => {
+    const { post } = this.props;
+    this.props.deletePost(post.id);
+  };
+
   render() {
     const { post } = this.props;
     return (
@@ -31,7 +36,7 @@ class PostItem extends React.Component {
               <Icon name="heart outline" /> 0
             </List.Item>
             <List.Item>
-              <Icon name="trash alternate" />
+              <Button name="trash alternate" onClick={this.handleDelete} />
             </List.Item>
           </List>
         </Segment>

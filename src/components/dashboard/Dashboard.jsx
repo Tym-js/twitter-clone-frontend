@@ -18,6 +18,18 @@ class Dashboard extends React.Component {
     };
   }
 
+  deletePost = postId => {
+    const currentUser = this.props.currentUser;
+    db.collection("users")
+      .doc(currentUser.uid)
+      .collection("myPosts")
+      .doc(postId)
+      .delete()
+      .then(() => {
+        this.props.getPosts(currentUser);
+      });
+  };
+
   render() {
     const {
       currentUser,
@@ -35,7 +47,7 @@ class Dashboard extends React.Component {
           <User user={currentUser} />
         </Grid.Column>
         <Grid.Column width={8}>
-          <TweetList posts={posts} />
+          <TweetList posts={posts} deletePost={this.deletePost} />
         </Grid.Column>
         <Grid.Column width={4}>
           <Notification users={users} />
