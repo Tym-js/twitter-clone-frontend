@@ -6,8 +6,8 @@ const Notification = ({ users }) => (
   <Segment.Group>
     <Segment>
       <Item.Group>
-        {users.map((user, id) => (
-          <NotificationItem key={id} user={user} />
+        {users.map(user => (
+          <NotificationItem key={user.uid} user={user} />
         ))}
       </Item.Group>
     </Segment>

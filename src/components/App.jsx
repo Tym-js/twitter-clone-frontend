@@ -8,6 +8,7 @@ import firebase from "firebase";
 
 import { setUser, clearUser } from "../actions/currentUser";
 import { getPosts, clearPosts } from "../actions/posts";
+import { getUsers } from "../actions/users";
 
 import Login from "./auth/Login.jsx";
 import Register from "./auth/Register.jsx";
@@ -23,6 +24,7 @@ class App extends React.Component {
         this.props.history.push(`/${user.uid}/tweets`);
         this.props.setUser(user);
         this.props.getPosts(user);
+        this.props.getUsers();
       } else {
         this.props.history.push("/login");
         this.props.clearUser(user);
@@ -60,12 +62,13 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.currentUser
+  user: state.currentUser,
+  users: state.users
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { setUser, clearUser, getPosts, clearPosts }
+    { setUser, clearUser, getPosts, clearPosts, getUsers }
   )(App)
 );

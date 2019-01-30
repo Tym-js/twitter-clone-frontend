@@ -33,6 +33,7 @@ class TweetModal extends React.Component {
         createdAt: new Date(),
         like_count: 0,
         user: {
+          uid: currentUser.uid,
           name: currentUser.name,
           photoURL: currentUser.photoURL
         }
