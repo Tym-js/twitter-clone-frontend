@@ -36,7 +36,13 @@ class PostItem extends React.Component {
               <Icon name="heart outline" /> 0
             </List.Item>
             <List.Item>
-              <Button name="trash alternate" onClick={this.handleDelete} />
+              <Button
+                circular
+                size="mini"
+                color="red"
+                icon="trash alternate"
+                onClick={this.handleDelete}
+              />
             </List.Item>
           </List>
         </Segment>
