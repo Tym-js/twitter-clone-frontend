@@ -66,7 +66,7 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
-  users: state.users.state,
+  users: state.users.users,
   posts: state.posts.posts,
   tweetModal: state.tweetModal
 });
